@@ -1,76 +1,120 @@
-<div>
-  <button (click)="addItem()">Add Branch</button>
+<div >
 </div>
 <div class="jumbotron mx-auto col-6">
+  <button (click)="addItem()">Add Branch</button>
+
   <form [formGroup]="orderForm">
     <div formArrayName="items" *ngFor="let item of orderForm.get('items').controls; let i = index;">
       <div [formGroupName]="i">
         <div>
           Full Name:
-          <input formControlName="name" class="form-control" placeholder="Enter FullName">
-          <div *ngIf="item.get('name').touched && item.get('name').invalid">
+          <input formControlName="name" class="form-control" placeholder="Enter FullName" 
+          [ngClass]="{ 'is-invalid':  item.get('name').errors && item.get('name').touched }" >
+          <div *ngIf="item.get('name').touched && item.get('name').invalid " class="invalid-feedback">
             <p *ngIf="item.get('name').errors.required"> Full Name is required</p>
           </div>
         </div>
         <div>
           Email:
-          <input formControlName="email"  class="form-control" placeholder="Enter Email">
-          <div *ngIf="item.get('email').touched && item.get('email').invalid">
+          <input formControlName="email"  class="form-control" placeholder="Enter Email"
+          [ngClass]="{ 'is-invalid':  item.get('email').errors && item.get('email').touched  }" >
+          <div *ngIf="item.get('email').touched && item.get('email').invalid" class="invalid-feedback">
             <p *ngIf="item.get('email').errors.required"> Email is required</p>
            <p *ngIf="item.get('email').errors.email">Email must be a valid email address</p>
           </div>
         </div>
         <div>
           Password:
-          <input formControlName="password"  class="form-control"  placeholder="Enter Password">
-          <div *ngIf="item.get('password').touched && item.get('password').invalid">
+          <input formControlName="password"  class="form-control"  placeholder="Enter Password"
+          [ngClass]="{ 'is-invalid':  item.get('password').errors && item.get('password').touched  }" >
+          <div *ngIf="item.get('password').touched && item.get('password').invalid" class="invalid-feedback">
             <p *ngIf="item.get('password').errors.required"> password is required</p>
           </div>
         </div>
         <div>
           confirm Password:
-          <input formControlName="confirmpassword"  class="form-control" placeholder="Enter confirmpassword">
-          <div *ngIf="item.get('confirmpassword').touched && item.get('confirmpassword').invalid">
-            <p *ngIf="item.get('confirmpassword').errors.required"> price is required</p>
+          <input formControlName="confirmpassword"  class="form-control" placeholder="Enter confirmpassword"
+          [ngClass]="{ 'is-invalid':  item.get('confirmpassword').errors && item.get('confirmpassword').touched }" >
+          <div *ngIf="item.get('confirmpassword').touched && item.get('confirmpassword').invalid" class="invalid-feedback">
+            <p *ngIf="item.get('confirmpassword').errors.required"> confirmpassword is required</p>
+            <div *ngIf="item.get('confirmpassword').errors.mustMatch">Passwords must match</div>
+
           </div>
         </div>
         <div>
           Branch Name:
-          <input formControlName="branchname"  class="form-control" placeholder="Enter BranchName">
-          <div *ngIf="item.get('branchname').touched && item.get('branchname').invalid">
-            <p *ngIf="item.get('branchname').errors.required"> price is required</p>
+          <input formControlName="branchname"  class="form-control" placeholder="Enter BranchName"
+          [ngClass]="{ 'is-invalid':  item.get('branchname').errors && item.get('branchname').touched  }" >
+          <div *ngIf="item.get('branchname').touched && item.get('branchname').invalid" class="invalid-feedback">
+            <p *ngIf="item.get('branchname').errors.required"> branchname is required</p>
           </div>
         </div>
         <div>
           Branch Country:
-          <input formControlName="branchcountry" class="form-control" placeholder="branchcountry">
-          <div *ngIf="item.get('branchcountry').touched && item.get('branchcountry').invalid">
-            <p *ngIf="item.get('branchcountry').errors.required"> price is required</p>
+          <!-- <input formControlName="branchcountry" class="form-control" placeholder="branchcountry"
+          [ngClass]="{ 'is-invalid':  item.get('branchcountry').errors  && item.get('branchcountry').touched}" > -->
+  
+          <select  formControlName="branchcountry" class="form-control"
+           [ngClass]="{ 'is-invalid':  item.get('branchcountry').errors  && item.get('branchcountry').touched}">
+            <option value="">-- select --</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="US">US</option>
+            <option value="Srilanka">Srilanka</option>
+          </select>
+          <div *ngIf="item.get('branchcountry').touched && item.get('branchcountry').invalid" class="invalid-feedback">
+            <p *ngIf="item.get('branchcountry').errors.required"> branchcountry is required</p>
           </div>
         </div>
 
 
         <div>
           Mobile Number:
-          <input formControlName="mobile"  class="form-control" placeholder="Enter Mobile Number">
-          <div *ngIf="item.get('mobile').touched && item.get('mobile').invalid">
+          <input formControlName="mobile"  class="form-control" placeholder="Enter Mobile Number"
+          [ngClass]="{ 'is-invalid':  item.get('mobile').errors && item.get('mobile').touched }" >
+          <div *ngIf="item.get('mobile').touched && item.get('mobile').invalid" class="invalid-feedback">
             <p *ngIf="item.get('mobile').errors.required"> Mobile Number is required</p>
             <p *ngIf="item.get('mobile').errors.pattern">Enter Proper Mobile number</p>
 
           </div>
         </div>
 
+        <div>
+          <!-- Branch Type: -->
+          <!-- <input formControlName="mobile"  class="form-control" 
+          [ngClass]="{ 'is-invalid':  item.get('mobile').errors && item.get('mobile').touched }" > -->
+
+
+          <label for="BranchType"> Branch Type:</label>
+<input id="mainBranch" type="radio" value="mainBranch" name="branch" formControlName="branch" >
+<!-- [ngClass]="{ 'is-invalid':  item.get('branch').errors && item.get('branch').touched }" -->
+<label for="mainBranch">Main Branch</label>
+<input id="subBranch" type="radio" value="subBranch" name="branch" formControlName="branch" >
+<label for="subBranch">Sub Branch</label>
+
+<div *ngIf="f.branch.touched && f.branch.invalid"class="alert alert-danger">
+
+<div *ngIf="f.branch.errors.required">branch is required.</div>
+
+</div>
+
+</div>
+
+
+
+
 
         <div>
           Branch Address:
-          <input formControlName="branchAddress" class="form-control" placeholder="Enter Branch Address">
-          <div *ngIf="item.get('branchAddress').touched && item.get('branchAddress').invalid">
-            <p *ngIf="item.get('branchAddress').errors.required"> price is required</p>
+          <textarea formControlName="branchAddress" class="form-control" placeholder="Enter Branch Address"
+          [ngClass]="{ 'is-invalid':  item.get('branchAddress').errors && item.get('branchAddress').touched }" ></textarea>
+          <div *ngIf="item.get('branchAddress').touched && item.get('branchAddress').invalid" class="invalid-feedback">
+            <p *ngIf="item.get('branchAddress').errors.required"> branchAddress is required</p>
           </div>
         </div>
 
       </div>
-      <button type="submit" [disabled]="!orderForm.valid">Submit</button><br><br><br>
+      <button type="submit" >Submit</button><br><br><br>
 
     </div>
   </form>

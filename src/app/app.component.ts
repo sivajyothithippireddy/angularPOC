@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { MustMatch } from 'src/MustMatch.validator';
 
 @Component({
   selector: 'app-root',
@@ -31,9 +32,13 @@ export class AppComponent {
       branchcountry: ['',[Validators.required]],
       mobile: ['',[Validators.required,Validators.pattern((/^\(?([6-9]{1})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/))]],
       branchAddress: ['',[Validators.required]],
+      branch : ['',[Validators.required]]
 
       
-    });
+    },
+     {
+      validator: MustMatch('password', 'confirmpassword')
+  });
   }
 
   addItem(): void {
