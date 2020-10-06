@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators, FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { MustMatch } from 'src/MustMatch.validator';
 
 @Component({
@@ -20,7 +20,6 @@ export class AppComponent {
   ngOnInit() {
   }
 
-
   addBranch(): FormGroup {
     return this.fb.group({
       name: ['',[Validators.required]],
@@ -29,11 +28,10 @@ export class AppComponent {
       confirmpassword: ['',[Validators.required]],
       branchname: ['',[Validators.required]],
       branchcountry: ['',[Validators.required]],
-      mobile: ['',[Validators.required,Validators.pattern((/^\(?([6-9]{1})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/))]],
+      mobile: ['',[Validators.required,Validators.pattern((/^\(?([7-9]{1})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/))]],
       branchAddress: ['',[Validators.required]],
       branchtype : ['',[Validators.required]],
-      branchbusinessType: ['',[,Validators.required]]
-
+      branchbusinessType: ['',[,Validators.required]],
       
     },
      {
@@ -44,6 +42,8 @@ export class AppComponent {
   addItem(): void {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.push(this.addBranch());
+    
+    
   }
 
 
