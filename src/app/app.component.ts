@@ -12,7 +12,6 @@ export class AppComponent {
 
   orderForm: FormGroup;
   items: FormArray;
-  submitted=false;
   constructor(private fb: FormBuilder) {
     this.orderForm = this.fb.group({
       items: this.fb.array([ this.addBranch() ])
@@ -32,7 +31,8 @@ export class AppComponent {
       branchcountry: ['',[Validators.required]],
       mobile: ['',[Validators.required,Validators.pattern((/^\(?([6-9]{1})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})$/))]],
       branchAddress: ['',[Validators.required]],
-      branch : ['',[Validators.required]]
+      branchtype : ['',[Validators.required]],
+      branchbusinessType: ['',[,Validators.required]]
 
       
     },
@@ -46,11 +46,5 @@ export class AppComponent {
     this.items.push(this.addBranch());
   }
 
-  // submitfun(){
-  //   this.submitted=true
-  //   if (this.orderForm.invalid) {
-  //     return;
-  // }
-  // }
 
 }
